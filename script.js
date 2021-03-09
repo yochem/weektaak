@@ -66,7 +66,7 @@ function createTable(data, person) {
         if (personTasks.length === 0) {
             continue;
         }
-        let repr = ["", "", "Keuken", "Keuken", "Keuken", "Douches", "WC's"];
+        let repr = ["", "", "Keuken", "Keuken", "Keuken", "WC's", "Douches"];
 
         let printWeek = [];
         for (let task of personTasks) {
@@ -81,6 +81,19 @@ function createTable(data, person) {
     document.querySelector("h1").innerHTML = `Weektaken van ${person}`;
 }
 
+function createSelect(data) {
+    let names = new Set();
+    for (let val of Object.values(data)) {
+        names.add(val[2]);
+        names.add(val[3]);
+        names.add(val[4]);
+    }
+    var element = document.getElementById("names");
+    for (let name of [...names].sort()) {
+        element.add(new Option(name));
+    }
+}
+
 fetch("data.csv", { method: "GET", headers: {} })
     .then(function (response) {
         return response.text();
@@ -93,10 +106,10 @@ fetch("data.csv", { method: "GET", headers: {} })
 
         if (!page || page === 'index.html') {
             let people = allTasks[thisWeek];
-            let [kitchen1, kitchen2, kitchen3, shower, toilet] = people.slice(2);
+            let [kitchen1, kitchen2, kitchen3, toilet, shower] = people.slice(2);
             document.getElementById("kitchen").innerHTML = `${kitchen1}, ${kitchen2}, ${kitchen3}`;
-            document.getElementById("shower").innerHTML = shower;
             document.getElementById("toilet").innerHTML = toilet;
+            document.getElementById("shower").innerHTML = shower;
         } else if (page === 'personal.html') {
             createSelect(allTasks);
             document.getElementById("names").addEventListener("change", function(change) {

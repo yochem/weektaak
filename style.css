@@ -2,7 +2,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: #FED75A;
-  overflow: hidden;
+  /* overflow: hidden; */
   font-family: Courier;
   color: #EC6D76;
   text-transform: uppercase;
@@ -65,8 +65,12 @@ th {
   background: inherit;
   font-family: Courier;
   color: #EC6D76;
-  text-transform: uppercase;
   font-weight: bold;
   text-align: center;
   font-size: 0.7em;
+}
+
+a {
+    font-size: 0.6em;
+    color: inherit;
 }
