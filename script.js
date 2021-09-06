@@ -59,7 +59,7 @@ function createTable(data, person) {
         let today = new Date();
         let thisWeek = getWeekNumber(today);
         let [weekNum, weekYear] = num.split("-");
-        if (weekYear < today.getFullYear() && weekNum < thisWeek) {
+        if (weekYear <= today.getFullYear() && weekNum < thisWeek) {
             continue;
         }
         let personTasks = getAllIndexes(week, person);
