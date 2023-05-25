@@ -110,6 +110,7 @@ fetch("data.csv", { method: "GET", headers: {} })
             document.getElementById("kitchen").innerHTML = `${kitchen1}, ${kitchen2}, ${kitchen3}`;
             document.getElementById("toilet").innerHTML = toilet;
             document.getElementById("shower").innerHTML = shower;
+            document.getElementById("weeknumber").innerHTML = `Week ${getWeekNumber(today)}`;
         } else if (page === 'personal.html') {
             createSelect(allTasks);
             document.getElementById("names").addEventListener("change", function(change) {
