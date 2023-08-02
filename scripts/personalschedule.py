@@ -195,6 +195,37 @@ def create_calendar(
     personal_filename.write_text(cal.serialize())
 
 
+def admin_calendar(schedule: Schedule, filename: Pathable = "admin.ics") -> None:
+    """
+    Create a calendar (ics-format) for the admin.
+
+    Writes the file to disk at location given by `filename`.
+
+    Args:
+        schedule: Schedule for everyone.
+        filename: A path with a format specifier for inserting the name.
+
+    Returns:
+        None
+    """
+    cal = ics.Calendar()
+
+    for week in schedule:
+        event = ics.Event(
+            name="Weektaak",
+            begin=week.week_start.isoformat(sep=" "),
+            duration=dt.timedelta(days=6),
+            transparent=True,
+            description=str(week),
+            created=dt.datetime.now(),
+            last_modified=dt.datetime.now(),
+        )
+        event.make_all_day()
+        cal.events.add(event)
+
+    Path(filename).write_text(cal.serialize())
+
+
 def cleanup(ics_dir: Pathable) -> None:
     """
     Remove all files ending with .ics in given directory.
@@ -229,10 +260,14 @@ def cli(cfg: dict[str, str]) -> None:
     for person, personal_schedule in index.items():
         create_calendar(person, personal_schedule, filename=ics_filename_format)
 
+    if admin_path := cfg.get("admin"):
+        admin_calendar(schedule, admin_path)
+
 
 if __name__ == "__main__":
     config = {
         "ics_filename_format": "../cal/{}.ics",
         "data_path": "../data.csv",
+        "admin": "../cal/admin.ics",
     }
     cli(config)
