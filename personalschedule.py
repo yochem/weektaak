@@ -200,6 +200,7 @@ def create_calendar(
         cal.events.add(event)
 
     personal_filename = format_filename_template(filename, person)
+    personal_filename.parent.mkdir(exist_ok=True, parents=True)
     personal_filename.write_text(cal.serialize())
 
 
