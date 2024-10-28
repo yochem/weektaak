@@ -8,20 +8,23 @@
         <script src="script.js"></script>
     </head>
     <body>
-        <div id="content">
-            <h1 id="title">Weektaken van ...</h1>
-            <h2></h2>
+        <header>
+            <h1>Weektaken van</h1>
+        </header>
+        <main>
             <select id="names">
                 <option disabled selected>Kies een naam</option>
             </select>
-            <a href="javascript:exportToCalendar(allTasks);">Exporteer naar agenda</a>
             <table id="table">
                 <thead>
-                <tr><th>Begin</th><th>Eind</th><th>Taak</th></tr>
+                <tr><th>Weeknr</th><th>Maandag</th><th>Taak</th></tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
-        </div>
+        </main>
+        <footer>
+            <a href="#" id="icslink">Exporteer naar agenda</a>
+        </footer>
     </body>
 </html>
