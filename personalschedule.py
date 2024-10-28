@@ -5,8 +5,8 @@ Currently, these generated calendar files are hosted at
 yochem.nl/weektaak/cal/{}.ics, where {} is a placeholder for every tenants name.
 """
 
+import base64
 import os
-
 import dataclasses
 import datetime as dt
 from pathlib import Path
@@ -102,10 +102,10 @@ def csv2schedule(csv_file: Pathable) -> Schedule:
             )]
     """
     data_path = Path(csv_file)
-    lines = data_path.read_text().splitlines()
+    lines = base64.b32decode(data_path.read_text()).decode('utf-8').splitlines()
 
-    # split and remove fields with empty fields
-    weeks = [splitted for line in lines if all(splitted := line.split(","))]
+    # split and remove lines with empty fields
+    weeks = [splitted for line in lines if all(splitted := str(line).split(","))]
 
     schedule = []
 
@@ -275,7 +275,7 @@ def cli(cfg: dict[str, str]) -> None:
 if __name__ == "__main__":
     config = {
         "ics_filename_format": "public/cal/{}.ics",
-        "data_path": "data.csv",
+        "data_path": "data",
         "admin": "public/cal/admin.ics",
     }
     cli(config)
