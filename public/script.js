@@ -28,7 +28,7 @@ function setContent(element, content) {
 
 function fillWeekList(weekList) {
   const personalLink = (name) =>
-    `<a href="/persoonlijk.html#${name}">${name}</a>`;
+    `<a href="/weektaak/persoonlijk.html#${name}">${name}</a>`;
 
   const linkList = [
     weekList["kitchen-1"],
