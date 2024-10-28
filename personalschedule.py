@@ -275,8 +275,8 @@ def cli(cfg: dict[str, str]) -> None:
 
 if __name__ == "__main__":
     config = {
-        "ics_filename_format": "public/cal/{}.ics",
+        "ics_filename_format": "weektaak/cal/{}.ics",
         "data_path": "data",
-        "admin": "public/cal/admin.ics",
+        "admin": "weektaak/cal/admin.ics",
     }
     cli(config)

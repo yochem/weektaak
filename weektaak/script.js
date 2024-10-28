@@ -151,7 +151,7 @@ function fillPersonalTable(data, person) {
   fetch("/weektaak/tasks.json")
     .then((response) => response.json())
     .then((data) => {
-      let page = new URL(location.href).pathname.split('/')[-1];
+      let page = new URL(location.href).pathname.split('/').at(-1);
       if (!page || page === "" || page === "index.html") {
         const monday = getShownWeek();
         let date = data[monday];
