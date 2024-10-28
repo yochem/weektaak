@@ -148,7 +148,7 @@ function fillPersonalTable(data, person) {
 }
 
 (function () {
-  fetch("/tasks.json")
+  fetch("/weektaak/tasks.json")
     .then((response) => response.json())
     .then((data) => {
       let page = new URL(location.href).pathname.split('/')[-1];
