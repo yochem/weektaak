@@ -4,6 +4,7 @@ Personal .ics calendars for the cleaning schedule at OMHP.
 Currently, these generated calendar files are hosted at
 yochem.nl/weektaak/cal/{}.ics, where {} is a placeholder for every tenants name.
 """
+
 import os
 
 import dataclasses
@@ -64,7 +65,14 @@ class WeekCleaning:
                 "Keuken 🍳",
             ]
             + [f"- {name}" for name in self.kitchen]
-            + ["", "Wc's 🚽", f"- {self.toilets}", "", "Douches 🚿", f"- {self.showers}"]
+            + [
+                "",
+                "Wc's 🚽",
+                f"- {self.toilets}",
+                "",
+                "Douches 🚿",
+                f"- {self.showers}",
+            ]
         )
 
 
@@ -266,8 +274,8 @@ def cli(cfg: dict[str, str]) -> None:
 
 if __name__ == "__main__":
     config = {
-        "ics_filename_format": "../cal/{}.ics",
-        "data_path": "../data.csv",
-        "admin": "../cal/admin.ics",
+        "ics_filename_format": "public/cal/{}.ics",
+        "data_path": "data.csv",
+        "admin": "public/cal/admin.ics",
     }
     cli(config)
