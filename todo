@@ -1,11 +1,9 @@
 - favicon goed
 - persoonlijk:
 	- terugknop home
-	- naam groter tonen
 	- breedte kolommen?
 - home:
-	- startdatum?
 	- terug naar deze week knop
 - js opschonen
 - css moderner
-- build steps
+- build steps (install ics)
