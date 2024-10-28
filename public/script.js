@@ -141,23 +141,23 @@ function fillPersonalTable(data, person) {
 
   document
     .querySelector("#icslink")
-    .setAttribute("href", `/cal/${person.toLowerCase()}.ics`);
+    .setAttribute("href", `/weektaak/cal/${person.toLowerCase()}.ics`);
 
   document.location.hash = person;
   document.title = `Weektaken ${person}`;
 }
 
 (function () {
-  fetch("tasks.json")
+  fetch("/tasks.json")
     .then((response) => response.json())
     .then((data) => {
-      let page = new URL(location.href).pathname;
-      if (!page || page === "/" || page === "/index.html") {
+      let page = new URL(location.href).pathname.split('/')[-1];
+      if (!page || page === "" || page === "index.html") {
         const monday = getShownWeek();
         let date = data[monday];
         date.weekStart = monday;
         fillWeekList(date);
-      } else if (page === "/persoonlijk.html") {
+      } else if (page === "persoonlijk.html") {
         fillPersonalPage(data);
         document
           .getElementById("names")
