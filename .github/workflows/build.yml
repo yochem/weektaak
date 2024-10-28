@@ -25,12 +25,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
-      - name: Run personalschedule.py
-        run: python3 personalschedule.py
-      - name: Run csv2json.py
+      - name: Generate personal .ics files
+        run: pip install ics && python3 personalschedule.py
+      - name: Convert csv data to json
         run: python3 csv2json.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
