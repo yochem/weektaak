@@ -30,5 +30,5 @@ def csv_to_json(csv_file_path, json_file_path):
 
 if __name__ == "__main__":
     csv_file_path = "data"
-    json_file_path = "weektaak/tasks.json"
+    json_file_path = "public/tasks.json"
     csv_to_json(csv_file_path, json_file_path)

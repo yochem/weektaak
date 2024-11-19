@@ -2,7 +2,7 @@
 Personal .ics calendars for the cleaning schedule at OMHP.
 
 Currently, these generated calendar files are hosted at
-yochem.nl/weektaak/cal/{}.ics, where {} is a placeholder for every tenants name.
+omhp.nl/weektaak/cal/{}.ics, where {} is a placeholder for every tenants name.
 """
 
 import base64
@@ -275,8 +275,8 @@ def cli(cfg: dict[str, str]) -> None:
 
 if __name__ == "__main__":
     config = {
-        "ics_filename_format": "weektaak/cal/{}.ics",
+        "ics_filename_format": "public/cal/{}.ics",
         "data_path": "data",
-        "admin": "weektaak/cal/admin.ics",
+        "admin": "public/cal/admin.ics",
     }
     cli(config)

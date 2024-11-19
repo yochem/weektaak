@@ -28,7 +28,7 @@ function setContent(element, content) {
 
 function fillWeekList(weekList) {
   const personalLink = (name) =>
-    `<a href="/weektaak/persoonlijk.html#${name}">${name}</a>`;
+    `<a href="persoonlijk.html#${name}">${name}</a>`;
 
   const linkList = [
     weekList["kitchen-1"],
@@ -141,14 +141,14 @@ function fillPersonalTable(data, person) {
 
   document
     .querySelector("#icslink")
-    .setAttribute("href", `/weektaak/cal/${person.toLowerCase()}.ics`);
+    .setAttribute("href", `cal/${person.toLowerCase()}.ics`);
 
   document.location.hash = person;
   document.title = `Weektaken ${person}`;
 }
 
 (function () {
-  fetch("/weektaak/tasks.json")
+  fetch("tasks.json")
     .then((response) => response.json())
     .then((data) => {
       let page = new URL(location.href).pathname.split('/').at(-1);
