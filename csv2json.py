@@ -19,6 +19,8 @@ def csv_to_json(csv_file_path, json_file_path):
 
     for row in csv_reader:
         start, _, *tasks = row
+        if not start:
+            break
         start_date = datetime.strptime(start, "%d-%m-%Y").date().isoformat()
         data[start_date] = dict(zip(keys, tasks))
 
