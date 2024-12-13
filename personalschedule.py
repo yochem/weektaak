@@ -63,7 +63,7 @@ class WeekCleaning:
     def __str__(self) -> str:
         """Return string representation of this week's cleaning."""
         schedule = dedent(f"""
-            TAKEN WEEK {self.week_start.isocalendar().week}
+            Week {self.week_start.isocalendar().week}
 
             Keuken 🍳
             - {self.kitchen[0]}
@@ -81,6 +81,10 @@ class WeekCleaning:
 
                 Badkamer boven 🔝
                 - {self.upstairs}""")
+
+        schedule += dedent(f"""
+
+            Zie https://yochem.nl/weektaak/ voor het hele schema""")
 
         return schedule
 
