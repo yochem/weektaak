@@ -11,6 +11,7 @@ import dataclasses
 import datetime as dt
 from pathlib import Path
 from typing import Iterator
+from textwrap import dedent
 
 import ics
 
@@ -23,18 +24,19 @@ class WeekCleaning:
     """
     One week of cleaning.
 
-    Currently has three people for the kitchen, one for the toilets and one
-    for the showers.
+    Currently has three people for the kitchen, one for the toilets, one
+    for the showers, and one for the bathroom upstairs.
     """
 
     week_start: dt.datetime
     kitchen: list[str]
     toilets: str
     showers: str
+    upstairs: str
 
     def cleaners(self) -> list[str]:
         """Return a list of all names doing the cleaning of this week."""
-        return self.kitchen + [self.toilets, self.showers]
+        return self.kitchen + [self.toilets, self.showers, self.upstairs]
 
     def __contains__(self, person: str) -> bool:
         """Return if a person's name is in the schedule for this week."""
@@ -53,28 +55,34 @@ class WeekCleaning:
             return "Wc's"
         if name == self.showers:
             return "Douches"
+        if name == self.upstairs:
+            return "Boven"
 
         raise ValueError("name not in cleaning schedule")
 
     def __str__(self) -> str:
         """Return string representation of this week's cleaning."""
-        return "\n".join(
-            [
-                f"TAKEN WEEK {self.week_start.isocalendar().week}",
-                "",
-                "Keuken 🍳",
-            ]
-            + [f"- {name}" for name in self.kitchen]
-            + [
-                "",
-                "Wc's 🚽",
-                f"- {self.toilets}",
-                "",
-                "Douches 🚿",
-                f"- {self.showers}",
-            ]
-        )
+        schedule = dedent(f"""
+            TAKEN WEEK {self.week_start.isocalendar().week}
 
+            Keuken 🍳
+            - {self.kitchen[0]}
+            - {self.kitchen[1]}
+            - {self.kitchen[2]}
+
+            Wc's 🚽
+            - {self.toilets}
+
+            Douches 🚿
+            - {self.showers}""")
+
+        if self.upstairs != '':
+            schedule += dedent(f"""
+
+                Badkamer boven 🔝
+                - {self.upstairs}""")
+
+        return schedule
 
 Schedule = list[WeekCleaning]
 
@@ -91,14 +99,15 @@ def csv2schedule(csv_file: Pathable) -> Schedule:
 
     Example:
         csv-file content:
-            01-01-2023,08-01,2023,Abdula,Bob,Chiara,Darkan,Eloise
+            01-01-2023,08-01,2023,Abdula,Bob,Chiara,Darkan,Eloise,Frank
 
         Becomes:
             [WeekCleaning(
                 week_start=datetime(2023, 1, 1),
                 kitchen=['Abdula', 'Bob', 'Chiara'],
                 toilets='Darkan',
-                showers='Eloise'
+                showers='Eloise',
+                upstairs='Frank'
             )]
     """
     data_path = Path(csv_file)
@@ -109,9 +118,9 @@ def csv2schedule(csv_file: Pathable) -> Schedule:
 
     schedule = []
 
-    for begin, _, *kitchen, toilets, showers in weeks:
+    for begin, _, *kitchen, toilets, showers, upstairs in weeks:
         begin_date = dt.datetime.strptime(begin, "%d-%m-%Y")
-        schedule.append(WeekCleaning(begin_date, kitchen, toilets, showers))
+        schedule.append(WeekCleaning(begin_date, kitchen, toilets, showers, upstairs))
 
     return schedule
 

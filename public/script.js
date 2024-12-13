@@ -3,6 +3,7 @@ const translations = {
   kitchen: "Keuken",
   toilets: "Wc's",
   showers: "Douches",
+  upstairs: "Badkamer boven",
 };
 
 function addDays(date, days) {
@@ -41,6 +42,11 @@ function fillWeekList(weekList) {
   setContent("kitchen", linkList);
   setContent("toilet", personalLink(weekList.toilets));
   setContent("shower", personalLink(weekList.showers));
+  if (weekList.upstairs !== "") {
+    setContent("upstairs", personalLink(weekList.upstairs));
+  } else {
+    document.querySelector('section:has(#upstairs)').remove()
+  }
 
   // start on tuesday
   const start = addDays(new Date(weekList.weekStart), 1).humanShort();

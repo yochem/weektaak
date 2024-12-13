@@ -8,7 +8,14 @@ from pathlib import Path
 
 def csv_to_json(csv_file_path, json_file_path):
     data = {}
-    keys = ("kitchen-1", "kitchen-2", "kitchen-3", "toilets", "showers")
+    keys = (
+        "kitchen-1",
+        "kitchen-2",
+        "kitchen-3",
+        "toilets",
+        "showers",
+        "upstairs",
+    )
 
 
     lines = base64.b32decode(Path(csv_file_path).read_text()).decode('utf-8').splitlines()
