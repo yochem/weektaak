@@ -123,7 +123,7 @@ function fillPersonalPage(data) {
 function fillPersonalTable(data, person) {
   const rows = Object.entries(data).reduce((acc, [weekStart, weekData]) => {
     const weekTasks = Object.entries(weekData)
-      .filter(([_, name]) => name === person)
+      .filter(([_, name]) => name !== '' && name === person)
       .map(([task, _]) =>
         task.startsWith("kitchen") ? "keuken" : translations[task],
       );
