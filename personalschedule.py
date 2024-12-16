@@ -118,11 +118,13 @@ def csv2schedule(csv_file: Pathable) -> Schedule:
     lines = base64.b32decode(data_path.read_text()).decode('utf-8').splitlines()
 
     # split and remove lines with empty fields
-    weeks = [splitted for line in lines if all(splitted := str(line).split(","))]
+    weeks = [str(line).split(",") for line in lines[1:]]
 
     schedule = []
 
     for begin, _, *kitchen, toilets, showers, upstairs in weeks:
+        if not begin:
+            break
         begin_date = dt.datetime.strptime(begin, "%d-%m-%Y")
         schedule.append(WeekCleaning(begin_date, kitchen, toilets, showers, upstairs))
 
