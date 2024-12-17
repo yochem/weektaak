@@ -63,8 +63,6 @@ class WeekCleaning:
     def __str__(self) -> str:
         """Return string representation of this week's cleaning."""
         schedule = dedent(f"""
-            Week {self.week_start.isocalendar().week}
-
             Keuken 🍳
             - {self.kitchen[0]}
             - {self.kitchen[1]}
